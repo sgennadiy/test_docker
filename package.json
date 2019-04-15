@@ -1,0 +1,28 @@
+{
+  "name": "test_docker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "@wdio/local-runner": "^5.7.6",
+    "@wdio/mocha-framework": "^5.7.6",
+    "@wdio/selenium-standalone-service": "^5.7.2",
+    "@wdio/spec-reporter": "^5.7.2",
+    "assert": "^1.4.1",
+    "webdriverio": "^5.7.6"
+  },
+  "devDependencies": {
+    "@wdio/cli": "^5.7.6"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/wdio config/wdio.conf.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://m_sauliak@bitbucket.org/m_sauliak/test_docker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/m_sauliak/test_docker#readme"
+}
