@@ -23,9 +23,9 @@ imageName = "tests"
 mountPoint = "/app-src"
 
 //VSC data
-gitRepository = "https://bitbucket.org/m_sauliak/test_docker.git"
+gitRepository = "https://github.com/sgennadiy/test_docker.git"
 gitCheckoutFolder = "test_docker"
-gitCredentials = "zerberos@tut.by"
+gitCredentials = "082gennadiy@gmail.com"
 gitBranch = "master"
 
 node {
