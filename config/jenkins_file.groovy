@@ -39,13 +39,13 @@ node {
   }
 
   //Not necessary, we have -rm parameter in 'docker run' stage  
-  stage('Clean old containers') {
+ /* stage('Clean old containers') {
       sh 'docker ps -f name=grid -q | xargs --no-run-if-empty docker container stop'
       sh 'docker container ls -a -f name=grid -q | xargs -r docker container rm -f'
       sh 'docker ps -f name=c -q | xargs --no-run-if-empty docker container stop'
       sh 'docker container ls -a -f name=tests -q | xargs -r docker container rm -f' 
   }
-
+*/
    stage('Start Selenium Grid') {       
        sh "docker pull elgalu/selenium"
        //sh "docker run -d --rm --name=grid -p 4444:24444 -p 5900:25900 -e TZ=\"US/Pacific\" --expose 4444 -v d:/data:/data --privileged elgalu/selenium"
