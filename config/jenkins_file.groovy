@@ -50,14 +50,14 @@ node {
      
        bat "docker pull elgalu/selenium:latest"
        //sh "docker run -d --rm --name=grid -p 4444:24444 -p 5900:25900 -e TZ=\"US/Pacific\" --expose 4444 -v d:/data:/data --privileged elgalu/selenium"
-       bat "docker run -d --rm --name=grid -e TZ=\"US/Pacific\" -P --expose 24444 -v d:/data:/data --privileged elgalu/selenium:latest"
+       bat "docker run -d --rm --name=grid -e TZ=\"US/Pacific\" -P --expose 24444 -v d:/testDocker/data:/testDocker/data --privileged elgalu/selenium:latest"
        //sh "docker exec grid wait_all_done 30s"  
     }
 
     stage('Start Tests Container') {
         bat "docker build -t \"${imageName}\" - < config/Dockerfile"
         echo ("Image built...")
-        bat "docker run -it -d --rm --name \"${imageName}\" --link grid -e \"AT_PORT=24444\" -e \"AT_HOST=grid\" -v d:/data:/data --privileged ${imageName}"
+        bat "docker run -it -d --rm --name \"${imageName}\" --link grid -e \"AT_PORT=24444\" -e \"AT_HOST=grid\" -v d:/testDocker/data:/testDocker/data --privileged ${imageName}"
     }
 
   def errors = [];
