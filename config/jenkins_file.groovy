@@ -11,10 +11,10 @@ def executeCommand(String command, String params = "", returnStdOut = false) {
     def cmd = "docker exec ${params} -i ${imageName} bash -c \"${command}\""
     echo "Executing: ${cmd}"
     if (returnStdOut) {
-        result = sh returnStdout:true, script: cmd
+        result = bat returnStdout:true, script: cmd
         return result.trim()
     } else {
-        sh cmd
+        bat cmd
     }
 }
 
@@ -47,16 +47,17 @@ node {
   }
 */
    stage('Start Selenium Grid') {       
-       sh "docker pull elgalu/selenium:latest"
+     
+       bat "docker pull elgalu/selenium:latest"
        //sh "docker run -d --rm --name=grid -p 4444:24444 -p 5900:25900 -e TZ=\"US/Pacific\" --expose 4444 -v d:/data:/data --privileged elgalu/selenium"
-       sh "docker run -d --rm --name=grid -e TZ=\"US/Pacific\" -P --expose 24444 -v d:/data:/data --privileged elgalu/selenium:latest"
+       bat "docker run -d --rm --name=grid -e TZ=\"US/Pacific\" -P --expose 24444 -v d:/data:/data --privileged elgalu/selenium:latest"
        //sh "docker exec grid wait_all_done 30s"  
     }
 
     stage('Start Tests Container') {
-        sh "docker build -t \"${imageName}\" - < config/Dockerfile"
+        bat "docker build -t \"${imageName}\" - < config/Dockerfile"
         echo ("Image built...")
-        sh "docker run -it -d --rm --name \"${imageName}\" --link grid -e \"AT_PORT=24444\" -e \"AT_HOST=grid\" -v d:/data:/data --privileged ${imageName}"
+        bat "docker run -it -d --rm --name \"${imageName}\" --link grid -e \"AT_PORT=24444\" -e \"AT_HOST=grid\" -v d:/data:/data --privileged ${imageName}"
     }
 
   def errors = [];
@@ -83,8 +84,8 @@ node {
     }
 
   stage('Remove containers') {
-      sh "docker rm -vf grid"
-      sh "docker rm -vf tests"
+      bat "docker rm -vf grid"
+      bat "docker rm -vf tests"
     }
   }
 }
